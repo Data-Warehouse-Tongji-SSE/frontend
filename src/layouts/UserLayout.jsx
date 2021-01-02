@@ -42,20 +42,20 @@ const UserLayout = (props) => {
             <div className={styles.header}>
               <Link to="/">
                 <img alt="logo" className={styles.logo} src={logo} />
-                <span className={styles.title}>云销售</span>
+                <span className={styles.title}>三一数仓</span>
               </Link>
             </div>
             <div className={styles.desc}>
               <FormattedMessage
                 id="pages.layouts.userLayout.title"
-                defaultMessage="云销售是云计算的课程项目"
+                defaultMessage="三一数仓是数据仓库课程的期末项目"
               />
             </div>
           </div>
           {children}
         </div>
         <DefaultFooter
-          copyright={`${new Date().getFullYear()} 云计算课程小组`}
+          copyright={`${new Date().getFullYear()} 三一数仓制作组`}
           links={[
             {
               key: 'frontend',

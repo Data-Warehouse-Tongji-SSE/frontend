@@ -39,18 +39,18 @@ const menuDataRender = (menuList) =>
 
 const defaultFooterDom = (
   <DefaultFooter
-    copyright={`${new Date().getFullYear()} 云计算课程小组`}
+    copyright={`${new Date().getFullYear()} 三一数仓制作组`}
     links={[
       {
         key: 'frontend',
         title: '前端开发',
-        href: 'https://github.com/drinkmooon/general-project-frontend',
+        href: 'https://github.com/Data-Warehouse-Tongji-SSE/frontend',
         blankTarget: true,
       },
       {
         key: 'backend',
         title: '后端开发',
-        href: 'https://github.com/ComposeC/Sell',
+        href: 'https://github.com/Data-Warehouse-Tongji-SSE/backend',
         blankTarget: true,
       },
       {

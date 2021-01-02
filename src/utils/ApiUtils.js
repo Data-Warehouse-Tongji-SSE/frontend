@@ -1,8 +1,5 @@
 import request from '@/utils/request';
 
-const Server = 'http://8.133.173.118:8899';
-const BASE_URL = 'http://mockjs.docway.net/mock/1b5MYNv513x'
-
 
 export async function getAllItems(){
   return request('/api/getAllItems');
@@ -33,9 +30,6 @@ export async function getTopSellingItem(){
   return request('/api/getTopSellingItem');
 }
 
-
-
-////////////////
 export async function queryRule(params){
    return request('/api/getAllItems', {
     params,
