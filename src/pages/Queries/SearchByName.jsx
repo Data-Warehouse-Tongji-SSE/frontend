@@ -2,10 +2,10 @@ import { Button, message, Input, Drawer, Card, Col, Row, Divider, Table } from '
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
-import { Chart, Interval, Line, Point, Tooltip, Axis, useView } from 'bizcharts';
+import { Chart, Interval, Line, Point, Tooltip, Axis, useView, Coordinate } from 'bizcharts';
 const { Search } = Input;
 
-const GeneralStatistics = () => {
+const SearchByName = () => {
 
   const [dataList, setDataList] = useState([]);
 
@@ -69,97 +69,66 @@ const GeneralStatistics = () => {
 
   const columns = [
     {
-      title: "订单编号",
+      title: "电影ID",
       dataIndex: 'id',
-      sorter: (a, b) => a.id - b.id,
-    },
-    {
-      title: "用户ID",
-      dataIndex: 'userId',
-      filters: dataList ? Array.from(new Set(dataList.map((data) => {
-        return data.userId
-      }
-      ))).map((data) => {
-        return {
-          text: data,
-          value: data
-        }
-      }) : [{
-        text: 'placeholder',
-        value: 'placeholder',
-      }],
-      onFilter: (value, record) => {
-        return record.userId === value
-      },
-    },
-    {
-      title: "商品Id",
-      dataIndex: 'itemId',
-    },
-    {
-      title: "订购数量",
-      dataIndex: 'count',
-      sorter: (a, b) => a.id - b.id,
-    },
-    {
-      title: "总金额",
-      dataIndex: "payment",
-      sorter: (a, b) => a.payment - b.payment,
-      render: (val) =>
-        `${val}${' 元 '}`,
-    },
-    {
-      title: '下单时间',
-      dataIndex: 'orderTime',
       sorter: (a, b) => {
-        return (new Date(a.orderTime) > new Date(b.orderTime)) ? 1 : -1
+        return (a.id > b.id) ? 1 : -1
       },
     },
     {
-      title: "备注",
-      dataIndex: 'description',
-      valueType: 'textarea',
-      render: (text) => { if (!text) { return '-' } }
+      title: "电影名称",
+      dataIndex: 'title',
+    },
+    {
+      title: "电影时长",
+      dataIndex: "videoTime",
+      sorter: (a, b) => a.videoTime - b.videoTime,
+      render: (val) =>
+        `${val}${' 分钟 '}`,
+    },
+    {
+      title: '电影评分',
+      dataIndex: 'points',
+      sorter: (a, b) => a.points - b.points,
+    },
+    {
+      title: "版本数量",
+      dataIndex: 'totalNumber',
+      sorter: (a, b) => a.totalNumber - b.totalNumber,
     },
   ];
 
-
+  const time_data = [
+    {
+      数据库: "MySQL",
+      执行时间: 131744
+    },
+    {
+      数据库: "Neo4j",
+      执行时间: 104970
+    },
+    {
+      数据库: "Hive",
+      执行时间: 29034
+    },
+  ];
+  const counter = 0
 
   return (
     <PageContainer>
+      <Card title="执行时间（毫秒）" style={{ width: '100%' }}>
+        <Chart height={150} data={time_data} autoFit>
+          <Coordinate transpose />
+          <Interval position="数据库*执行时间" />
+        </Chart>
+      </Card>
+      <Divider />
       <Search
         placeholder="示例：Living Water"
-        addonBefore="电影名称"
+        addonBefore={`当前结果总数：${counter}`}
         allowClear
         enterButton="开始查询"
-        size="large"/>
-      <Divider />
-      <div className="general-statistics-wrapper">
-        <Row gutter={16}>
-          <Col span={12}>
-            <Card title="销售之星" style={{ width: '100%' }}>
-              <Chart height={300} autoFit data={starData} >
-                <Interval position="source*金额" />
-              </Chart>
-            </Card>
-          </Col>
-          <Col span={12}>
-            <Card title="总体销售额" style={{ width: '100%' }}>
-              <Chart
-                padding={[10, 20, 50, 50]}
-                autoFit
-                height={300}
-                data={dailyData}
-                scale={{ 销售额: { min: 0 } }}
-              >
-                <Line position="date*销售额" />
-                <Point position="date*销售额" />
-                <Tooltip showCrosshairs triggerOn='hover' />
-              </Chart>
-            </Card>
-          </Col>
-        </Row>
-      </div>
+        size="large" />
       <Divider />
       <Table
         dataSource={dataList}
@@ -169,4 +138,4 @@ const GeneralStatistics = () => {
   );
 };
 
-export default GeneralStatistics;
+export default SearchByName;

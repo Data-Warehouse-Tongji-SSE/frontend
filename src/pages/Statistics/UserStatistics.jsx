@@ -1,7 +1,6 @@
 import { Button, message, Input, Drawer, Card, Col, Row, Divider, Table, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
-import { queryRule, getAllUser, getSalesAnalysisByUser, updateRule, addRule, removeRule } from '../../utils/ApiUtils';
 import { Chart, Interval, Line, Point, Tooltip, Axis } from 'bizcharts';
 
 const UserStatistics = () => {
@@ -10,12 +9,12 @@ const UserStatistics = () => {
   const [dataList, setDataList] = useState([]);
   const [chosenUserName,setChosenUserName] = useState("请选择用户");
 
-  useEffect(
-    () => {
-      getAllUser().then((res) => {
-        setDataList(res.data);
-      })
-    }, []);
+  // useEffect(
+  //   () => {
+  //     getAllUser().then((res) => {
+  //       setDataList(res.data);
+  //     })
+  //   }, []);
   
   const [dailyData, setDailyData] = useState([]);
 

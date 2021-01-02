@@ -2,7 +2,6 @@ import { Button, message, Input, Drawer, Card, Col, Row, Divider, Table } from '
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
-import { getAllItems,getSalesAnalysisByItem, updateRule, addRule, removeRule } from '../../utils/ApiUtils';
 import { Chart, Interval, Line, Point, Tooltip, Axis } from 'bizcharts';
 
 const GoodsStatistics = () => {
@@ -10,12 +9,12 @@ const GoodsStatistics = () => {
   
   const [dataList, setDataList] = useState([]);
   const [ chosenGoodsName,setChosenGoodsName] = useState("请选择商品");
-  useEffect(
-    () => {
-      getAllItems().then((res) => {
-        setDataList(res.data);
-      })
-    }, []);
+  // useEffect(
+  //   () => {
+  //     getAllItems().then((res) => {
+  //       setDataList(res.data);
+  //     })
+  //   }, []);
 
   const [dailyData, setDailyData] = useState([]);
 
