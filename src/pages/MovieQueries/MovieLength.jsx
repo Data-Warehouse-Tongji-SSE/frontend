@@ -44,13 +44,16 @@ const MovieLength = () => {
       return
     }
     else {
-      let requestURL = '/api/comment' + '?'
+      let requestURL = '/api/videoTime' + '?'
       if (minToSend){
-        requestURL += 'min=' + minToSend
+        requestURL += 'min=' + minToSend + "&"
       }
       if (maxToSend){
-        requestURL += 'max=' + maxToSend
-      }      
+        requestURL += 'max=' + maxToSend + "&"
+      }
+      if (requestURL.endsWith("&")){
+        requestURL=requestURL.substring(0, requestURL.length-1)
+      }
       request(requestURL).
         then((res) => {
           console.log(res);
@@ -72,7 +75,7 @@ const MovieLength = () => {
             ]);
             setDataList(res.data.movieDatas.map((movie) => ({
               id: movie.id,
-              title: movie.Title,
+              title: movie.title,
               videoTime: movie.videoTime,
               points: movie.points,
               totalNumber: movie.totalNumber

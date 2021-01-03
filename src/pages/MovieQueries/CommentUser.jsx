@@ -48,7 +48,7 @@ const CommentUser = () => {
             ]);
             setDataList(res.data.movieDatas.map((movie) => ({
               id: movie.id,
-              title: movie.Title,
+              title: movie.title,
               videoTime: movie.videoTime,
               points: movie.points,
               totalNumber: movie.totalNumber

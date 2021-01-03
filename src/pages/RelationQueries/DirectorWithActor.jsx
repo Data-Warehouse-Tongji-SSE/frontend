@@ -23,15 +23,12 @@ const DirectorWithActor = () => {
     },
   ]);
 
-  const [counter, setCounter] = useState(0);
-
   const SearchDirectorName = value => {
     if (value) {
       request('/api/connection' + '?' + 'Director=' + value).
         then((res) => {
           console.log(res);
           if (res.data) {
-            setCounter(res.data.actors.length);
             setTimeData([
               {
                 数据库: "MySQL",
@@ -84,8 +81,8 @@ const DirectorWithActor = () => {
       </Card>
       <Divider />
       <Search
-        placeholder="示例：Mike Christie"
-        addonBefore={`当前结果总数：${counter}`}
+        placeholder="导演姓名（示例：Mike Christie）"
+        addonBefore={`按导演查询经常合作的演员`}
         enterButton="开始查询"
         size="large"
         onSearch={SearchDirectorName}

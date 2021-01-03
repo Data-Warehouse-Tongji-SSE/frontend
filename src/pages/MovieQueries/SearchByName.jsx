@@ -48,10 +48,13 @@ const SearchByName = () => {
             ]);
             setDataList(res.data.movieDatas.map((movie) => ({
               id: movie.id,
-              title: movie.Title,
+              title: movie.title,
               videoTime: movie.videoTime,
               points: movie.points,
-              totalNumber: movie.totalNumber
+              totalNumber: movie.totalNumber,
+              positiveComments: movie.positiveComments,
+              neutralComments: movie.neutralComments,
+              negativeComments: movie.negativeComments
             })))
           }
         })
@@ -93,6 +96,21 @@ const SearchByName = () => {
       title: "版本数量",
       dataIndex: 'totalNumber',
       sorter: (a, b) => a.totalNumber - b.totalNumber,
+    },
+    {
+      title: "正面评价数",
+      dataIndex: 'positiveComments',
+      sorter: (a, b) => a.positiveComments - b.positiveComments,
+    },
+    {
+      title: "中立评价数",
+      dataIndex: 'neutralComments',
+      sorter: (a, b) => a.neutralComments - b.neutralComments,
+    },
+    {
+      title: "负面评价数",
+      dataIndex: 'negativeComments',
+      sorter: (a, b) => a.negativeComments - b.negativeComments,
     },
   ];
 

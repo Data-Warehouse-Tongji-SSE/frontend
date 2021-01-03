@@ -45,11 +45,14 @@ const UserReview = () => {
     }
     else {
       let requestURL = '/api/userComment' + '?'
-      if (minToSend) {
-        requestURL += 'min=' + minToSend
+      if (minToSend){
+        requestURL += 'min=' + minToSend + "&"
       }
-      if (maxToSend) {
-        requestURL += 'max=' + maxToSend
+      if (maxToSend){
+        requestURL += 'max=' + maxToSend + "&"
+      }
+      if (requestURL.endsWith("&")){
+        requestURL=requestURL.substring(0, requestURL.length-1)
       }
       request(requestURL).
         then((res) => {
@@ -72,7 +75,7 @@ const UserReview = () => {
             ]);
             setDataList(res.data.movieDatas.map((movie) => ({
               id: movie.id,
-              title: movie.Title,
+              title: movie.title,
               videoTime: movie.videoTime,
               points: movie.points,
               totalNumber: movie.totalNumber
