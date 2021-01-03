@@ -31,6 +31,8 @@ const Composition = () => {
 
   const [supportingName, setSupportingName] = useState("");
 
+  const [loadingState, setLoadingState ] = useState(false);
+
   const DirectorNameChange = value => {
     if (value) {
       setDirectorName(value)
@@ -83,9 +85,11 @@ const Composition = () => {
       if (requestURL.endsWith("&")) {
         requestURL = requestURL.substring(0, requestURL.length - 1)
       }
+      setLoadingState(true)
       request(requestURL).
         then((res) => {
           console.log(res);
+          setLoadingState(false)
           if (res.data) {
             setCounter(res.data.count);
             setTimeData([
@@ -220,6 +224,7 @@ const Composition = () => {
             }}
             placeholder="（可选）"
             onSearch={CompositionSearch}
+            loading={loadingState}
           />
         </Input.Group>
       </Space>

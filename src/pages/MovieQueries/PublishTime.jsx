@@ -28,6 +28,7 @@ const PublishTime = () => {
   const [yearToSend, setYearToSend] = useState(-1);
   const [quarterToSend, setQuarterToSend] = useState(-1);
   const [monthToSend, setMonthToSend] = useState(-1);
+  const [loadingState, setLoadingState ] = useState(false);
 
   const handleTime = (moment, value) => {
     if (value) {
@@ -75,9 +76,11 @@ const PublishTime = () => {
       if (requestURL.endsWith("&")) {
         requestURL = requestURL.substring(0, requestURL.length - 1)
       }
+      setLoadingState(true)
       request(requestURL).
         then((res) => {
           console.log(res);
+          setLoadingState(false)
           if (res.data) {
             setCounter(res.data.count);
             setTimeData([
@@ -178,6 +181,7 @@ const PublishTime = () => {
             addonBefore={`当前结果总数：${counter}`}
             enterButton="开始查询"
             onSearch={SearchCommentUser}
+            loading={loadingState}
           />
         </Row>
       </Space>

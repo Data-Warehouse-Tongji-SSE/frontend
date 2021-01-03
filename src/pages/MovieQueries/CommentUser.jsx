@@ -24,12 +24,15 @@ const CommentUser = () => {
   ]);
 
   const [counter, setCounter] = useState(0);
+  const [loadingState, setLoadingState ] = useState(false);
 
   const SearchCommentUser = value => {
     if (value) {
+      setLoadingState(true)
       request('/api/comment' + '?' + 'userId=' + value).
         then((res) => {
           console.log(res);
+          setLoadingState(false)
           if (res.data) {
             setCounter(res.data.count);
             setTimeData([
@@ -110,6 +113,7 @@ const CommentUser = () => {
         addonBefore={`当前结果总数：${counter}`}
         enterButton="开始查询"
         onSearch={SearchCommentUser}
+        loading={loadingState}
       />
       <Divider />
       <Table

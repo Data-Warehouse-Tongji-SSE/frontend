@@ -27,6 +27,8 @@ const UserReview = () => {
 
   const [minValue, setMinValue] = useState(0);
 
+  const [loadingState, setLoadingState ] = useState(false);
+
   const minValueChange = value => {
     if (value) {
       setMinValue(value)
@@ -57,9 +59,11 @@ const UserReview = () => {
       if (requestURL.endsWith("&")) {
         requestURL = requestURL.substring(0, requestURL.length - 1)
       }
+      setLoadingState(true)
       request(requestURL).
         then((res) => {
           console.log(res);
+          setLoadingState(false)
           if (res.data) {
             setCounter(res.data.count);
             setTimeData([
@@ -164,6 +168,7 @@ const UserReview = () => {
           }}
           placeholder="最高评分（示例：3.9）"
           onSearch={SearchMovieLength}
+          loading={loadingState}
         />
       </Input.Group>
       <Divider />

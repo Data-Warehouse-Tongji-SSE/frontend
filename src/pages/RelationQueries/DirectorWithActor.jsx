@@ -7,6 +7,7 @@ const { Search } = Input;
 
 const DirectorWithActor = () => {
   const [dataList, setDataList] = useState([]);
+  const [loadingState, setLoadingState ] = useState(false);
 
   const [timeData, setTimeData] = useState([
     {
@@ -25,9 +26,11 @@ const DirectorWithActor = () => {
 
   const SearchDirectorName = value => {
     if (value) {
+      setLoadingState(true)
       request('/api/connection' + '?' + 'Director=' + value).
         then((res) => {
           console.log(res);
+          setLoadingState(false)
           if (res.data) {
             setTimeData([
               {
@@ -85,6 +88,7 @@ const DirectorWithActor = () => {
         addonBefore={`按导演查询经常合作的演员`}
         enterButton="开始查询"
         onSearch={SearchDirectorName}
+        loading={loadingState}
       />
       <Divider />
       <Table
