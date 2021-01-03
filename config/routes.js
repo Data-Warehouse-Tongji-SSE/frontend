@@ -50,27 +50,27 @@ export default [
                   {
                     name: 'movie-length',
                     path: '/queries/movie-length',
-                    component: './Statistics/GeneralStatistics',
+                    component: './Queries/MovieLength',
                   },
                   {
                     name: 'publish-time',
                     path: '/queries/publish-time',
-                    component: './Statistics/GeneralStatistics',
+                    component: './Queries/PublishTime',
                   },                                    
                   {
                     name: 'user-review',
                     path: '/queries/user-review',
-                    component: './Statistics/GoodsStatistics',
+                    component: './Queries/UserReview',
                   },
                   {
                     name: 'comment-user',
                     path: '/queries/comment-user',
-                    component: './Statistics/GoodsStatistics',
+                    component: './Queries/CommentUser',
                   },
                   {
                     name: 'composition',
                     path: '/queries/composition',
-                    component: './Statistics/GoodsStatistics',
+                    component: './Queries/Composition',
                   },                                    
                 ],               
               },                                                                       
