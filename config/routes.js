@@ -14,7 +14,7 @@ export default [
               {
                 path: '/',
                 redirect: '/statistics/general-statistics',
-              },         
+              },
               {
                 path: '/statistics',
                 name: 'statistics',
@@ -35,45 +35,57 @@ export default [
                     path: '/statistics/emotional-statistics',
                     component: './Statistics/GoodsStatistics',
                   },
-                ],               
-              }, 
+                ],
+              },
               {
-                path: '/queries',
-                name: 'queries',
+                path: '/movie-queries',
+                name: 'movie-queries',
                 icon: 'dashboard',
                 routes: [
                   {
                     name: 'search-by-name',
-                    path: '/queries/search-by-name',
-                    component: './Queries/SearchByName',
+                    path: '/movie-queries/search-by-name',
+                    component: './MovieQueries/SearchByName',
                   },
                   {
                     name: 'movie-length',
-                    path: '/queries/movie-length',
-                    component: './Queries/MovieLength',
+                    path: '/movie-queries/movie-length',
+                    component: './MovieQueries/MovieLength',
                   },
                   {
                     name: 'publish-time',
-                    path: '/queries/publish-time',
-                    component: './Queries/PublishTime',
-                  },                                    
+                    path: '/movie-queries/publish-time',
+                    component: './MovieQueries/PublishTime',
+                  },
                   {
                     name: 'user-review',
-                    path: '/queries/user-review',
-                    component: './Queries/UserReview',
+                    path: '/movie-queries/user-review',
+                    component: './MovieQueries/UserReview',
                   },
                   {
                     name: 'comment-user',
-                    path: '/queries/comment-user',
-                    component: './Queries/CommentUser',
+                    path: '/movie-queries/comment-user',
+                    component: './MovieQueries/CommentUser',
                   },
                   {
                     name: 'composition',
-                    path: '/queries/composition',
-                    component: './Queries/Composition',
-                  },                                    
-                ],               
-              },                                                                       
+                    path: '/movie-queries/composition',
+                    component: './MovieQueries/Composition',
+                  },
+                ],
+              },
+              {
+                path: '/relation-queries',
+                name: 'relation-queries',
+                icon: 'dashboard',
+                routes: [
+                  {
+                    name: 'director-with-actor',
+                    path: '/relation-queries/director-with-actor',
+                    component: './RelationQueries/DirectorWithActor',
+                  },
+                ]
+              },
               {
                 component: './404',
               },
