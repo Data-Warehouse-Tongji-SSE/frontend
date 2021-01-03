@@ -45,14 +45,14 @@ const UserReview = () => {
     }
     else {
       let requestURL = '/api/userComment' + '?'
-      if (minToSend){
+      if (minToSend) {
         requestURL += 'min=' + minToSend + "&"
       }
-      if (maxToSend){
+      if (maxToSend) {
         requestURL += 'max=' + maxToSend + "&"
       }
-      if (requestURL.endsWith("&")){
-        requestURL=requestURL.substring(0, requestURL.length-1)
+      if (requestURL.endsWith("&")) {
+        requestURL = requestURL.substring(0, requestURL.length - 1)
       }
       request(requestURL).
         then((res) => {
@@ -125,10 +125,11 @@ const UserReview = () => {
         </Chart>
       </Card>
       <Divider />
-      <Input.Group>
+      <Input.Group compact>
         <Input
+          addonBefore={`当前结果总数：${counter}`}
           style={{
-            width: "10%",
+            width: "30%",
             borderRight: 0,
             pointerEvents: 'none',
             backgroundColor: '#f0f0f0',
@@ -139,12 +140,11 @@ const UserReview = () => {
         />
         <Input
           onChange={e => minValueChange(e.target.value)}
-          style={{ width: "40%", textAlign: 'center' }}
+          style={{ width: "30%", textAlign: 'center' }}
           placeholder="最低评分（示例：3.8）" />
         <Input
           style={{
             width: "10%",
-            borderLeft: 0,
             borderRight: 0,
             pointerEvents: 'none',
             backgroundColor: '#fff',
@@ -155,7 +155,7 @@ const UserReview = () => {
         />
         <Search
           style={{
-            width: "40%",
+            width: "30%",
             borderLeft: 0,
             textAlign: 'center',
           }}

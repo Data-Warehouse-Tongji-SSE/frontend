@@ -22,6 +22,7 @@ const Composition = () => {
       执行时间: 0
     },
   ]);
+  const [counter, setCounter] = useState(0);
 
   const columns = [
     {
@@ -64,10 +65,11 @@ const Composition = () => {
       </Card>
       <Divider />
       <Space direction="vertical">
-        <Input.Group>
+        <Input.Group compact>
           <Input
+            addonBefore={`当前结果总数：${counter}`}
             style={{
-              width: "12%",
+              width: "25%",
               borderRight: 0,
               pointerEvents: 'none',
               backgroundColor: '#f0f0f0',
@@ -77,12 +79,11 @@ const Composition = () => {
             disabled
           />
           <Input
-            style={{ width: "12%" }}
+            style={{ width: "10%" }}
             placeholder="示例:" />
           <Input
             style={{
-              width: "12%",
-              borderLeft: 0,
+              width: "10%",
               borderRight: 0,
               pointerEvents: 'none',
               backgroundColor: '#f0f0f0',
@@ -92,12 +93,11 @@ const Composition = () => {
             disabled
           />
           <Input
-            style={{ width: "12%" }}
+            style={{ width: "10%" }}
             placeholder="示例:" />
           <Input
             style={{
-              width: "12%",
-              borderLeft: 0,
+              width: "10%",
               borderRight: 0,
               pointerEvents: 'none',
               backgroundColor: '#f0f0f0',
@@ -107,12 +107,11 @@ const Composition = () => {
             disabled
           />
           <Input
-            style={{ width: "12%" }}
-            placeholder="示例:" />                        
+            style={{ width: "10%" }}
+            placeholder="示例:" />
           <Input
             style={{
-              width: "12%",
-              borderLeft: 0,
+              width: "10%",
               borderRight: 0,
               pointerEvents: 'none',
               backgroundColor: '#f0f0f0',
@@ -123,7 +122,7 @@ const Composition = () => {
           />
           <Search
             style={{
-              width: "16%",
+              width: "15%",
               borderLeft: 0,
             }}
             placeholder="示例:"
