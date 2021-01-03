@@ -125,7 +125,7 @@ const MovieLength = () => {
         </Chart>
       </Card>
       <Divider />
-      <Input.Group size="large">
+      <Input.Group>
         <Input
           style={{
             width: "10%",
@@ -154,7 +154,6 @@ const MovieLength = () => {
           disabled
         />
         <Search
-          size="large"
           style={{
             width: "35%",
             borderLeft: 0,

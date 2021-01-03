@@ -109,7 +109,6 @@ const CommentUser = () => {
         placeholder="示例：A1TONI9A0YFOD6"
         addonBefore={`当前结果总数：${counter}`}
         enterButton="开始查询"
-        size="large"
         onSearch={SearchCommentUser}
       />
       <Divider />

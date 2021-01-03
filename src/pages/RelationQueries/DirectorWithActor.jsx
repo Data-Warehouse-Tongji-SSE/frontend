@@ -84,7 +84,6 @@ const DirectorWithActor = () => {
         placeholder="导演姓名（示例：Mike Christie）"
         addonBefore={`按导演查询经常合作的演员`}
         enterButton="开始查询"
-        size="large"
         onSearch={SearchDirectorName}
       />
       <Divider />

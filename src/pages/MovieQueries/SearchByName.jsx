@@ -127,7 +127,6 @@ const SearchByName = () => {
         placeholder="示例：Living Water"
         addonBefore={`当前结果总数：${counter}`}
         enterButton="开始查询"
-        size="large"
         onSearch={SearchMovieName}
       />
       <Divider />
