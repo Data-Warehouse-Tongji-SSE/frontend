@@ -70,7 +70,7 @@ const PublishTime = () => {
         requestURL += 'Month=' + monthToSend + "&"
       }
       if (value) {
-        requestURL += 'Weekday=' + value + "&"
+        requestURL += 'WeekDay=' + value + "&"
       }
       if (requestURL.endsWith("&")) {
         requestURL = requestURL.substring(0, requestURL.length - 1)

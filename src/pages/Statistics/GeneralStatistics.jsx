@@ -1,170 +1,37 @@
-import { Button, message, Input, Drawer, Card, Col, Row, Divider, Table } from 'antd';
-import React, { useState, useRef, useEffect } from 'react';
-import { useIntl, FormattedMessage } from 'umi';
-import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
-import { Chart, Interval, Line, Point, Tooltip, Axis, useView } from 'bizcharts';
-const { Search } = Input;
+import { Card } from 'antd';
+import React, { useState } from 'react';
+import { PageContainer } from '@ant-design/pro-layout';
+import { Chart, Interval, Coordinate } from 'bizcharts';
 
 const GeneralStatistics = () => {
 
-  const [dataList, setDataList] = useState([]);
-
-  const [starData, setStarData] = useState([]);
-
-  const [dailyData, setDailyData] = useState([]);
-
-  // useEffect(() => {
-  //   getSalesAnalysis().then((res) => {
-  //     if (!res.data) return;
-  //     let newDailyData = [];
-  //     const curDate = new Date();
-  //     for (let i = res.data.length - 1; i >= 0 ; i--) {
-  //       let historyDate = new Date(curDate.getTime() - 24 * 60 * 60 * 1000 * i);
-  //       let month = historyDate.getMonth() + 1;
-  //       let date = historyDate.getDate();
-  //       newDailyData.push({
-  //         date: month + '-' + date,
-  //         销售额: res.data[i],
-  //       })
-  //     }
-  //     setDailyData(newDailyData);
-  //   })
-  // }, []);
-
-  // useEffect(
-  //   () => {
-  //     getTopSellingItem().then((res) => {
-  //       if (!res.data) return;
-  //       let newStarData = [];
-  //       for (let i = 0; i < res.data.length; i++) {
-  //         newStarData.push({
-  //           source: '商品 ' + res.data[i].name,
-  //           金额: res.data[i].total,
-  //         })
-  //       }
-  //       getBestCustomer().then((res) => {
-  //         if (!res.data) return;
-  //         for (let i = 0; i < res.data.length; i++) {
-  //           newStarData.push({
-  //             source: '用户 ' + res.data[i].name,
-  //             金额: res.data[i].total,
-  //           })
-  //         }
-  //         console.log(newStarData);
-  //         setStarData(
-  //           newStarData
-  //         )
-  //       })
-  //     })
-  //   }, []
-  // )
-
-  // useEffect(
-  //   () => {
-  //     getAllOrder().then((res) => {
-  //       setDataList(res.data);
-  //     })
-  //   }, []
-  // );
-
-  const columns = [
+  const timeData = [
     {
-      title: "订单编号",
-      dataIndex: 'id',
-      sorter: (a, b) => a.id - b.id,
+      数据字段: "电影",
+      数据量: 134452
     },
     {
-      title: "用户ID",
-      dataIndex: 'userId',
-      filters: dataList ? Array.from(new Set(dataList.map((data) => {
-        return data.userId
-      }
-      ))).map((data) => {
-        return {
-          text: data,
-          value: data
-        }
-      }) : [{
-        text: 'placeholder',
-        value: 'placeholder',
-      }],
-      onFilter: (value, record) => {
-        return record.userId === value
-      },
+      数据字段: "导演和演员",
+      数据量: 193556
     },
     {
-      title: "商品Id",
-      dataIndex: 'itemId',
+      数据字段: "用户",
+      数据量: 820879
     },
     {
-      title: "订购数量",
-      dataIndex: 'count',
-      sorter: (a, b) => a.id - b.id,
-    },
-    {
-      title: "总金额",
-      dataIndex: "payment",
-      sorter: (a, b) => a.payment - b.payment,
-      render: (val) =>
-        `${val}${' 元 '}`,
-    },
-    {
-      title: '下单时间',
-      dataIndex: 'orderTime',
-      sorter: (a, b) => {
-        return (new Date(a.orderTime) > new Date(b.orderTime)) ? 1 : -1
-      },
-    },
-    {
-      title: "备注",
-      dataIndex: 'description',
-      valueType: 'textarea',
-      render: (text) => { if (!text) { return '-' } }
-    },
+      数据字段: "评论数",
+      数据量: 2557147
+    },  
   ];
-
-
 
   return (
     <PageContainer>
-      <Search
-        placeholder="示例：Living Water"
-        addonBefore="电影名称"
-        allowClear
-        enterButton="开始查询"
-        size="large"/>
-      <Divider />
-      <div className="general-statistics-wrapper">
-        <Row gutter={16}>
-          <Col span={12}>
-            <Card title="销售之星" style={{ width: '100%' }}>
-              <Chart height={300} autoFit data={starData} >
-                <Interval position="source*金额" />
-              </Chart>
-            </Card>
-          </Col>
-          <Col span={12}>
-            <Card title="总体销售额" style={{ width: '100%' }}>
-              <Chart
-                padding={[10, 20, 50, 50]}
-                autoFit
-                height={300}
-                data={dailyData}
-                scale={{ 销售额: { min: 0 } }}
-              >
-                <Line position="date*销售额" />
-                <Point position="date*销售额" />
-                <Tooltip showCrosshairs triggerOn='hover' />
-              </Chart>
-            </Card>
-          </Col>
-        </Row>
-      </div>
-      <Divider />
-      <Table
-        dataSource={dataList}
-        columns={columns}
-      />
+      <Card title="数据量统计" style={{ width: '100%' }}>
+        <Chart height={300} data={timeData} autoFit>
+          <Coordinate transpose />
+          <Interval position="数据字段*数据量" />
+        </Chart>
+      </Card>
     </PageContainer>
   );
 };

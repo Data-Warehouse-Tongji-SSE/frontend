@@ -26,15 +26,15 @@ export default [
                     component: './Statistics/GeneralStatistics',
                   },
                   {
-                    name: 'cooperation-statistics',
-                    path: '/statistics/user-statistics',
-                    component: './Statistics/UserStatistics',
-                  },
-                  {
                     name: 'emotional-statistics',
                     path: '/statistics/emotional-statistics',
-                    component: './Statistics/GoodsStatistics',
+                    component: './Statistics/EmotionalStatistics',
                   },
+                  {
+                    name: 'cooperation-statistics',
+                    path: '/statistics/cooperation-statistics',
+                    component: './Statistics/CooperationStatistics',
+                  },               
                 ],
               },
               {
