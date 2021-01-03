@@ -139,7 +139,7 @@ const UserReview = () => {
         />
         <Input
           onChange={e => minValueChange(e.target.value)}
-          style={{ width: "35%", textAlign: 'center' }}
+          style={{ width: "40%", textAlign: 'center' }}
           placeholder="最低评分（示例：3.8）" />
         <Input
           style={{
@@ -155,7 +155,7 @@ const UserReview = () => {
         />
         <Search
           style={{
-            width: "35%",
+            width: "40%",
             borderLeft: 0,
             textAlign: 'center',
           }}
