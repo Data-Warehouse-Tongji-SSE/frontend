@@ -1,4 +1,4 @@
-import { Input, Card, Divider, Table } from 'antd';
+import { Input, Card, Divider, Table, notification } from 'antd';
 import React, { useState } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import { Chart, Interval, Coordinate } from 'bizcharts';
@@ -26,7 +26,7 @@ const CommentUser = () => {
   const [counter, setCounter] = useState(0);
 
   const SearchCommentUser = value => {
-    if (value)
+    if (value) {
       request('/api/comment' + '?' + 'userId=' + value).
         then((res) => {
           console.log(res);
@@ -55,6 +55,14 @@ const CommentUser = () => {
             })))
           }
         })
+    }
+    else {
+      notification.error({
+        message: `查询失败`,
+        description: `请输入要查询的用户ID。`,
+      })
+      return
+    }
   }
 
   const columns = [
@@ -100,7 +108,6 @@ const CommentUser = () => {
       <Search
         placeholder="示例：A1TONI9A0YFOD6"
         addonBefore={`当前结果总数：${counter}`}
-        allowClear
         enterButton="开始查询"
         size="large"
         onSearch={SearchCommentUser}

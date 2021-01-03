@@ -1,4 +1,4 @@
-import { Input, Card, Divider, Table } from 'antd';
+import { Input, Card, Divider, Table, notification } from 'antd';
 import React, { useState } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import { Chart, Interval, Coordinate } from 'bizcharts';
@@ -25,9 +25,33 @@ const MovieLength = () => {
 
   const [counter, setCounter] = useState(0);
 
-  const SearchCommentUser = value => {
-    if (value)
-      request('/api/comment' + '?' + 'userId=' + value).
+  const [minValue, setMinValue] = useState(0);
+
+  const minValueChange = value => {
+    if (value) {
+      setMinValue(value)
+    }
+  }
+
+  const SearchMovieLength = maxValue => {
+    const minToSend = parseInt(minValue)
+    const maxToSend = parseInt(maxValue)
+    if ((!minToSend) && (!maxToSend)) {
+      notification.error({
+        message: `查询失败`,
+        description: `请输入最小时长或最大时长。`,
+      })
+      return
+    }
+    else {
+      let requestURL = '/api/comment' + '?'
+      if (minToSend){
+        requestURL += 'min=' + minToSend
+      }
+      if (maxToSend){
+        requestURL += 'max=' + maxToSend
+      }      
+      request(requestURL).
         then((res) => {
           console.log(res);
           if (res.data) {
@@ -55,6 +79,7 @@ const MovieLength = () => {
             })))
           }
         })
+    }
   }
 
   const columns = [
@@ -97,14 +122,45 @@ const MovieLength = () => {
         </Chart>
       </Card>
       <Divider />
-      <Search
-        placeholder="示例：A1TONI9A0YFOD6"
-        addonBefore={`当前结果总数：${counter}`}
-        allowClear
-        enterButton="开始查询"
-        size="large"
-        onSearch={SearchCommentUser}
-      />
+      <Input.Group size="large">
+        <Input
+          style={{
+            width: "10%",
+            borderRight: 0,
+            pointerEvents: 'none',
+            backgroundColor: '#f0f0f0',
+            textAlign: 'center',
+          }}
+          placeholder="时长范围"
+          disabled
+        />
+        <Input
+          onChange={e => minValueChange(e.target.value)}
+          style={{ width: "35%", textAlign: 'center' }}
+          placeholder="最小时长（分钟）" />
+        <Input
+          style={{
+            width: "10%",
+            borderLeft: 0,
+            borderRight: 0,
+            pointerEvents: 'none',
+            backgroundColor: '#fff',
+            textAlign: 'center',
+          }}
+          placeholder="~"
+          disabled
+        />
+        <Search
+          size="large"
+          style={{
+            width: "35%",
+            borderLeft: 0,
+            textAlign: 'center',
+          }}
+          placeholder="最大时长（分钟）"
+          onSearch={SearchMovieLength}
+        />
+      </Input.Group>
       <Divider />
       <Table
         dataSource={dataList}

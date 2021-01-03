@@ -1,4 +1,4 @@
-import { Input, Card, Divider, Table } from 'antd';
+import { Input, Card, Divider, Table, notification } from 'antd';
 import React, { useState } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import { Chart, Interval, Coordinate } from 'bizcharts';
@@ -25,9 +25,33 @@ const UserReview = () => {
 
   const [counter, setCounter] = useState(0);
 
-  const SearchCommentUser = value => {
-    if (value)
-      request('/api/comment' + '?' + 'userId=' + value).
+  const [minValue, setMinValue] = useState(0);
+
+  const minValueChange = value => {
+    if (value) {
+      setMinValue(value)
+    }
+  }
+
+  const SearchMovieLength = maxValue => {
+    const minToSend = parseFloat(minValue)
+    const maxToSend = parseFloat(maxValue)
+    if ((!minToSend) && (!maxToSend)) {
+      notification.error({
+        message: `查询失败`,
+        description: `请输入最低评分或最高评分。`,
+      })
+      return
+    }
+    else {
+      let requestURL = '/api/userComment' + '?'
+      if (minToSend) {
+        requestURL += 'min=' + minToSend
+      }
+      if (maxToSend) {
+        requestURL += 'max=' + maxToSend
+      }
+      request(requestURL).
         then((res) => {
           console.log(res);
           if (res.data) {
@@ -55,6 +79,7 @@ const UserReview = () => {
             })))
           }
         })
+    }
   }
 
   const columns = [
@@ -97,14 +122,45 @@ const UserReview = () => {
         </Chart>
       </Card>
       <Divider />
-      <Search
-        placeholder="示例：A1TONI9A0YFOD6"
-        addonBefore={`当前结果总数：${counter}`}
-        allowClear
-        enterButton="开始查询"
-        size="large"
-        onSearch={SearchCommentUser}
-      />
+      <Input.Group size="large">
+        <Input
+          style={{
+            width: "10%",
+            borderRight: 0,
+            pointerEvents: 'none',
+            backgroundColor: '#f0f0f0',
+            textAlign: 'center',
+          }}
+          placeholder="评分范围"
+          disabled
+        />
+        <Input
+          onChange={e => minValueChange(e.target.value)}
+          style={{ width: "35%", textAlign: 'center' }}
+          placeholder="最低评分（示例：3.8）" />
+        <Input
+          style={{
+            width: "10%",
+            borderLeft: 0,
+            borderRight: 0,
+            pointerEvents: 'none',
+            backgroundColor: '#fff',
+            textAlign: 'center',
+          }}
+          placeholder="~"
+          disabled
+        />
+        <Search
+          size="large"
+          style={{
+            width: "35%",
+            borderLeft: 0,
+            textAlign: 'center',
+          }}
+          placeholder="最高评分（示例：3.9）"
+          onSearch={SearchMovieLength}
+        />
+      </Input.Group>
       <Divider />
       <Table
         dataSource={dataList}
