@@ -22,7 +22,97 @@ const Composition = () => {
       执行时间: 0
     },
   ]);
+
   const [counter, setCounter] = useState(0);
+
+  const [directorName, setDirectorName] = useState("");
+
+  const [starringName, setStarringName] = useState("");
+
+  const [supportingName, setSupportingName] = useState("");
+
+  const DirectorNameChange = value => {
+    if (value) {
+      setDirectorName(value)
+    }
+    else{
+      setDirectorName("")
+    }
+  }
+
+  const StarringNameChange = value => {
+    if (value) {
+      setStarringName(value)
+    }
+    else{
+      setStarringName("")
+    }    
+  }
+
+  const SupportingNameChange = value => {
+    if (value) {
+      setSupportingName(value)
+    }
+    else{
+      setSupportingName("")
+    }    
+  }
+
+  const CompositionSearch = Genres => {
+    if ((!directorName) && (!starringName) && (!supportingName) && (!Genres)) {
+      notification.error({
+        message: `查询失败`,
+        description: `请至少输入导演、主演、参演、电影类型中的一个。`,
+      })
+      return
+    }
+    else {
+      let requestURL = '/api/composition' + '?'
+      if (directorName) {
+        requestURL += 'Director=' + directorName + "&"
+      }
+      if (starringName) {
+        requestURL += 'Starring=' + starringName + "&"
+      }
+      if (supportingName) {
+        requestURL += 'Actor=' + supportingName + "&"
+      }
+      if (Genres) {
+        requestURL += 'Genres=' + Genres + "&"
+      }      
+      if (requestURL.endsWith("&")) {
+        requestURL = requestURL.substring(0, requestURL.length - 1)
+      }
+      request(requestURL).
+        then((res) => {
+          console.log(res);
+          if (res.data) {
+            setCounter(res.data.count);
+            setTimeData([
+              {
+                数据库: "MySQL",
+                执行时间: res.data.MySqlTime
+              },
+              {
+                数据库: "Neo4j",
+                执行时间: res.data.Neo4jTime
+              },
+              {
+                数据库: "Hive",
+                执行时间: res.data.HiveTime
+              },
+            ]);
+            setDataList(res.data.movieDatas.map((movie) => ({
+              id: movie.id,
+              title: movie.title,
+              videoTime: movie.videoTime,
+              points: movie.points,
+              totalNumber: movie.totalNumber
+            })))
+          }
+        })
+    }
+  }  
 
   const columns = [
     {
@@ -79,6 +169,7 @@ const Composition = () => {
             disabled
           />
           <Input
+            onChange={e => DirectorNameChange(e.target.value)}
             style={{ width: "10%" }}
             placeholder="示例:" />
           <Input
@@ -93,6 +184,7 @@ const Composition = () => {
             disabled
           />
           <Input
+            onChange={e => StarringNameChange(e.target.value)}
             style={{ width: "10%" }}
             placeholder="示例:" />
           <Input
@@ -107,6 +199,7 @@ const Composition = () => {
             disabled
           />
           <Input
+            onChange={e => SupportingNameChange(e.target.value)}
             style={{ width: "10%" }}
             placeholder="示例:" />
           <Input
@@ -126,6 +219,7 @@ const Composition = () => {
               borderLeft: 0,
             }}
             placeholder="示例:"
+            onSearch={CompositionSearch}
           />
         </Input.Group>
       </Space>

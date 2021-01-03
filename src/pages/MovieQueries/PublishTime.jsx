@@ -109,6 +109,9 @@ const PublishTime = () => {
   const timeTypeSelector = () => {
     const handleSelectorChange = value => {
       setDatePickerType(value);
+      setYearToSend(-1)
+      setQuarterToSend(-1)
+      setMonthToSend(-1)      
     };
 
     return (

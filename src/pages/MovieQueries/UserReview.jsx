@@ -31,6 +31,9 @@ const UserReview = () => {
     if (value) {
       setMinValue(value)
     }
+    else{
+      setMinValue(0)
+    }    
   }
 
   const SearchMovieLength = maxValue => {
