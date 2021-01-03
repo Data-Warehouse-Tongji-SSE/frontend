@@ -4,7 +4,7 @@ import { PageContainer } from '@ant-design/pro-layout';
 import { Chart, Interval, Coordinate } from 'bizcharts';
 
 const GeneralStatistics = () => {
-
+  // 此页面仅充当幻灯片使用，不调用后端和数据库
   const timeData = [
     {
       数据字段: "电影",

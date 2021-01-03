@@ -174,7 +174,7 @@ const PublishTime = () => {
         <Row />
         <Row>
           <Search
-            placeholder="周几（可选，周日请输7）"
+            placeholder="周几（可选，周日请填7）"
             addonBefore={`当前结果总数：${counter}`}
             enterButton="开始查询"
             onSearch={SearchCommentUser}

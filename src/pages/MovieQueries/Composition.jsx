@@ -171,7 +171,7 @@ const Composition = () => {
           <Input
             onChange={e => DirectorNameChange(e.target.value)}
             style={{ width: "10%" }}
-            placeholder="示例:" />
+            placeholder="（可选）" />
           <Input
             style={{
               width: "10%",
@@ -186,7 +186,7 @@ const Composition = () => {
           <Input
             onChange={e => StarringNameChange(e.target.value)}
             style={{ width: "10%" }}
-            placeholder="示例:" />
+            placeholder="（可选）" />
           <Input
             style={{
               width: "10%",
@@ -201,7 +201,7 @@ const Composition = () => {
           <Input
             onChange={e => SupportingNameChange(e.target.value)}
             style={{ width: "10%" }}
-            placeholder="示例:" />
+            placeholder="（可选）" />
           <Input
             style={{
               width: "10%",
@@ -218,7 +218,7 @@ const Composition = () => {
               width: "15%",
               borderLeft: 0,
             }}
-            placeholder="示例:"
+            placeholder="（可选）"
             onSearch={CompositionSearch}
           />
         </Input.Group>
